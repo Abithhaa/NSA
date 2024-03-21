@@ -1,33 +1,38 @@
 #!/bin/bash
 
-# Function to calculate grade based on marks
 calculate_grade() {
-    marks=$1
-    if [ $marks -ge 90 ]; then
-        echo "Grade: A"
-    elif [ $marks -ge 80 ]; then
-        echo "Grade: B"
-    elif [ $marks -ge 70 ]; then
-        echo "Grade: C"
-    elif [ $marks -ge 60 ]; then
-        echo "Grade: D"
+    if [ $1 -ge 80 ] && [ $1 -le 100 ]; then
+        grade="A"
+    elif [ $1 -ge 70 ] && [ $1 -le 79 ]; then
+        grade="B"
+    elif [ $1 -ge 60 ] && [ $1 -le 69 ]; then
+        grade="C"
     else
-        echo "Grade: F"
+        grade="D (Failed)"
     fi
 }
 
-# Input marks for different subjects
-echo "Enter marks for subject 1:"
-read subject1
-echo "Enter marks for subject 2:"
-read subject2
-echo "Enter marks for subject 3:"
-read subject3
+calculate_percentage() {
+    total=$(( $1 + $2 + $3 ))
+    percentage=$(( $total / 3 ))
+}
 
-# Calculate total marks
-total_marks=$((subject1 + subject2 + subject3))
+read -p "Enter the number of students: " num_students
 
-echo "Total Marks: $total_marks"
+for (( i=1; i<=$num_students; i++ )); do
+    echo "Enter details for student $i:"
+    read -p "Roll number: " roll_no
+    read -p "Name: " name
+    read -p "Marks for subject 1: " marks1
+    read -p "Marks for subject 2: " marks2
+    read -p "Marks for subject 3: " marks3
 
-# Calculate and display grade
-calculate_grade $total_marks
+    calculate_percentage $marks1 $marks2 $marks3
+    calculate_grade $percentage
+
+    echo "Roll Number: $roll_no"
+    echo "Name: $name"
+    echo "Percentage: $percentage%"
+    echo "Grade: $grade"
+    echo
+done
