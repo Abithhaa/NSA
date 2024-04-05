@@ -19,3 +19,4 @@ is_prime() {
 
 read -p "Enter a number to check if it's prime: " number
 is_prime $number
+
