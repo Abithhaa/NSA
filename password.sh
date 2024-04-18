@@ -31,3 +31,4 @@ read -s -p "Enter your password: " user_password
 echo
 
 validate_password "$user_password"
+
